@@ -7,42 +7,44 @@ Multi-line comment
 6789
 */
 
-var newLink = document.createElement("a");
-var allParagraphs = document.getElementsByTagName("p");
-var firstParagraph = allParagraphs[0];
-
-function toggleCopy(e) {
+(function() {
+  var newLink = document.createElement("a");
   var allParagraphs = document.getElementsByTagName("p");
+  var firstParagraph = allParagraphs[0];
 
-  for (var i = 0; i < allParagraphs.length; i++) {
-    if (i === 0) {
-      continue;
+  function toggleCopy(e) {
+    var allParagraphs = document.getElementsByTagName("p");
+
+    for (var i = 0; i < allParagraphs.length; i++) {
+      var para = allParagraphs[i];
+
+      if (i === 0) {
+        continue;
+      }
+
+      if (para.style.display === "none") {
+        para.style.display = "block";
+      } else {
+        para.style.display = "none";
+      }
     }
-    allParagraphs[i].style.display = "block";
+
+    if (this === newLink) {
+      this.remove();
+    }
+
+    if (e !== undefined && e.preventDefault !== undefined) {
+      e.preventDefault();
+    }
   }
 
-  if (this === newLink) {
-    this.remove();
-  }
+  newLink.setAttribute("href", "#");
+  newLink.setAttribute("class", "more-link");
+  newLink.innerHTML = "Read more";
 
-  if (e !== undefined && e.preventDefault !== undefined) {
-    e.preventDefault();
-  }
-}
+  newLink.addEventListener("click", toggleCopy);
 
-newLink.setAttribute("href", "#");
-newLink.setAttribute("class", "more-link");
-newLink.innerHTML = "Read more";
+  toggleCopy();
 
-newLink.addEventListener("click", toggleCopy);
-
-for (var i = 0; i < allParagraphs.length; i++) {
-  if (i === 0) {
-    continue;
-  }
-  allParagraphs[i].style.display = "none";
-}
-
-toggleCopy();
-
-firstParagraph.appendChild(newLink);
+  firstParagraph.appendChild(newLink);
+}());
