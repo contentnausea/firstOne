@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="tabs.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script>function searchPrimo() {
+	document.getElementById("primoQuery").value = "any,contains," + document.getElementById("primoQueryTemp").value.replace(/[,]/g, " ");
+	document.getElementById("primoQuery").value = document.getElementById("andyselect").value.replace(/[,]/g, " ")+",contains," + document.getElementById("primoQueryTemp").value.replace(/[,]/g, " ");
+	document.forms["searchForm"].submit();
+}
+
+	var previousSearchTerm='';
+function setPreviousSearchTerm() {
+    var flag = false;
+    if ((document.getElementById('searchString').value.trim() != '') && (previousSearchTerm.trim() == document.getElementById('searchString').value.trim())) {
+        flag = false;
+    } else {
+        flag = true;
+    }
+    previousSearchTerm=document.getElementById('searchString').value.trim();
+    document.forms["searchForm"].submit();
+    return flag;
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="tabs">
+  <input type="radio" name="tabs" id="tabone" checked="checked">
+  <label for="tabone">Tab One</label>
+  <div class="tab">
+    <div>
+<h3>Search the Library Catalog</h3>
+<!-- Replace Primo URL below -->
+<form class="search-form" id="simple" name="searchForm" method="get" target="_self" action="https://mines.primo.exlibrisgroup.com/discovery/search" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="searchPrimo()">
+ <!-- Customizable Parameters -->
+ <!-- Replace 01COLSCHL_INST with your insitution code-->
+<input name="institution" type="hidden" value="01COLSCHL_INST">
+<input name="vid" type="hidden" value="01COLSCHL_INST:MINES">
+<input name="tab" type="hidden" value="Everything">
+<input name="search_scope" type="hidden" value="MyInst_and_CI">
+<input name="mode" type="hidden" value="Basic">
+ <!-- Fixed parameters -->
+<input name="displayMode" type="hidden" value="full">
+<input name="bulkSize" type="hidden" value="10">
+<input name="highlight" type="hidden" value="true">
+<input name="dum" type="hidden" value="true">
+<input id="primoQuery" name="query" type="hidden">
+<input name="displayField" type="hidden" value="all">
+<!-- Enable this if "Expand My Results" is enabled by default in Views Wizard -->
+<input type="hidden" name="pcAvailabiltyMode" value="true">
+<input class="search-box" type="text" id="primoQueryTemp" value="" placeholder="Find books, articles, maps, and more">
+<!-- Search Button -->
+<input id="go" class="search-btn" title="Search" onclick="searchPrimo()" type="submit" value="Search" alt="Search">
+</form>
+</form>
+
+<!-- Search Links at the bottom of the search box -->
+<!-- Replace advanced search link below -->
+<div class="search-links"><p><i class="fa fa-search-plus"></i>
+ <a href="https://mines.primo.exlibrisgroup.com/discovery/search?vid=01COLSCHL_INST:MINES&mode=advanced&tab=Everything&lang=en&sortby=rank">
+Advanced Search</a> | <a href="https://library.mines.edu/ill">Can't Find It?</a></p></div>
+<!-- End div -->
+</div>
+  </div>
+
+  <input type="radio" name="tabs" id="tabtwo">
+  <label for="tabtwo">Tab Two</label>
+  <div class="tab">
+    <h1>Tab Two Content</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+
+  <input type="radio" name="tabs" id="tabthree">
+  <label for="tabthree">Tab Three</label>
+  <div class="tab">
+    <h1>Tab Three Content</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+  </div>
+</div>
+</body>
+
+</html>
